@@ -25,4 +25,4 @@ To use this template, you need `cookiecutter` installed. If you don't have it, i
 
 ```bash
 pip install cookiecutter
-cookiecutter [https://github.com/peter-daptl/fastapi-template.git](https://github.com/peter-daptl/fastapi-uv-template.git)
+cookiecutter [https://github.com/peter-daptl/fastapi-uv-template.git](https://github.com/peter-daptl/fastapi-uv-template.git)
