@@ -1,0 +1,36 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+      - id: debug-statements
+      - id: requirements-txt-fixer # Automatically sorts and de-duplicates requirements.txt
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.12.2 # Use the latest stable version of Ruff
+    hooks:
+      - id: ruff-format # This handles formatting (replaces black and isort)
+      - id: ruff        # This handles linting (replaces flake8 and autoflake)
+        args: [--fix]   # Automatically fix linting issues
+
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.7.20 # Use the latest stable version of uv's pre-commit hook
+    hooks:
+      - id: uv-lock # Ensures your uv.lock file is up-to-date with pyproject.toml
+      # - id: uv-export # Uncomment if you want to export to requirements.txt
+      #   args: [--output-file, requirements.txt]
+      # - id: uv-sync # Consider this for post-checkout/merge hooks if you want to automatically sync environments
+      #   stages: [post-checkout, post-merge, post-rewrite]
+
+  - repo: local
+    hooks:
+      - id: pytest
+        name: pytest
+        entry: uv run pytest --cov=. # Use uv to run pytest
+        language: system
+        pass_filenames: false
+        always_run: true # Always run tests, even if no files changed (good for safety)
+        types: [python]
